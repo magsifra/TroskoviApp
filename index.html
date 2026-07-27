@@ -458,12 +458,21 @@
     }
   }
 
-  async function syncData() {
+    async function syncData() {
     try {
+      // Google Apps Script NIJE dozvolio JSON Content-Type sa vanjske strane
+      // Zato ćemo podatke poslati kao običan tekst (form-urlencoded) da preskočimo CORS.
+      
+      const payload = new URLSearchParams();
+      payload.append('data', JSON.stringify(APP_DATA));
+
       const res = await fetch(API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(APP_DATA)
+        headers: {
+          // Ovo je ključno: Ne šaljemo 'application/json' nego obični tekst
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: payload.toString()
       });
       
       const response = await res.json();
@@ -474,7 +483,10 @@
       }
     } catch (e) {
       console.error('Greška pri spremanju:', e);
-      showToast('⚠️ Greška pri spremanju u Google Sheets');
+      // Sprečavamo da se toast "Greška pri spremanju" pojavi ako je korisnik već vidio poruku
+      if (!e.message.includes('⚠️')) {
+        showToast('⚠️ Greška pri spremanju u Google Sheets');
+      }
     }
   }
 
