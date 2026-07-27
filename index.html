@@ -66,11 +66,7 @@
       letter-spacing: 0.04em;
       transition: all .2s;
     }
-    .btn-pregled:hover {
-      color: var(--green);
-      border-color: var(--green-dim);
-      background: var(--green-glow);
-    }
+    .btn-pregled:hover { color: var(--green); border-color: var(--green-dim); background: var(--green-glow); }
 
     .btn-settings {
       font-family: inherit;
@@ -87,74 +83,26 @@
       color: var(--muted);
       transition: all .2s;
     }
-    .btn-settings:hover {
-      color: var(--green);
-      border-color: var(--green-dim);
-      background: var(--green-glow);
-    }
+    .btn-settings:hover { color: var(--green); border-color: var(--green-dim); background: var(--green-glow); }
 
     .screen { display: none; width: 100%; max-width: 480px; padding: 0 20px 40px; }
     .screen.active { display: flex; flex-direction: column; }
 
     #screen-home { align-items: center; gap: 0; padding-top: 40px; }
 
-    .hero-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .hero-date {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .hero-total-label {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 2px;
-    }
-
-    .hero-total {
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--green);
-      line-height: 1;
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-total span {
-      font-size: 22px;
-      font-weight: 500;
-      color: var(--green-dim);
-    }
-
+    .hero-label { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .hero-date { font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .hero-total-label { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+    .hero-total { font-size: 48px; font-weight: 800; color: var(--green); line-height: 1; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .hero-total span { font-size: 22px; font-weight: 500; color: var(--green-dim); }
     .hero-total.small { font-size: 32px; }
     .hero-total.small span { font-size: 18px; }
     .hero-total.orange { color: #fbbf24; }
     .hero-total.red { color: var(--danger); }
 
-    .divider {
-      width: 40px;
-      height: 2px;
-      background: var(--border);
-      border-radius: 2px;
-      margin: 24px auto;
-    }
+    .divider { width: 40px; height: 2px; background: var(--border); border-radius: 2px; margin: 24px auto; }
 
-    .cat-buttons {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 0;
-    }
+    .cat-buttons { width: 100%; display: flex; flex-direction: column; gap: 14px; margin-bottom: 0; }
 
     .btn-cat {
       font-family: inherit;
@@ -174,40 +122,15 @@
       position: relative;
       overflow: hidden;
     }
-
-    .btn-cat::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--green-glow);
-      opacity: 0;
-      transition: opacity .22s;
-    }
-
-    .btn-cat:hover {
-      border-color: var(--green-dim);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(74,222,128,0.10);
-    }
-
+    .btn-cat::after { content: ''; position: absolute; inset: 0; background: var(--green-glow); opacity: 0; transition: opacity .22s; }
+    .btn-cat:hover { border-color: var(--green-dim); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(74,222,128,0.10); }
     .btn-cat:hover::after { opacity: 1; }
-
-    .btn-cat.active {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px var(--green-glow), 0 8px 32px rgba(74,222,128,0.15);
-    }
-
+    .btn-cat.active { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow), 0 8px 32px rgba(74,222,128,0.15); }
     .btn-cat .cat-icon { font-size: 26px; line-height: 1; flex-shrink: 0; }
     .btn-cat .cat-info { display: flex; flex-direction: column; align-items: flex-start; }
     .btn-cat .cat-name { font-size: 17px; font-weight: 700; }
     .btn-cat .cat-sub  { font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 1px; }
-
-    .btn-cat .cat-arrow {
-      margin-left: auto;
-      color: var(--muted);
-      font-size: 18px;
-      transition: transform .2s, color .2s;
-    }
+    .btn-cat .cat-arrow { margin-left: auto; color: var(--muted); font-size: 18px; transition: transform .2s, color .2s; }
     .btn-cat:hover .cat-arrow { color: var(--green); transform: translateX(4px); }
 
     .input-panel {
@@ -224,57 +147,16 @@
       box-shadow: 0 0 0 4px var(--green-glow);
       animation: slideDown .25s cubic-bezier(.4,0,.2,1);
     }
-
     .input-panel.show { display: flex; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
 
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .panel-cat-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--green);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .btn-close-panel {
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 20px;
-      cursor: pointer;
-      padding: 2px 6px;
-      border-radius: 6px;
-      transition: color .15s, background .15s;
-      font-family: inherit;
-    }
+    .panel-header { display: flex; align-items: center; justify-content: space-between; }
+    .panel-cat-name { font-size: 14px; font-weight: 700; color: var(--green); letter-spacing: 0.05em; text-transform: uppercase; }
+    .btn-close-panel { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; padding: 2px 6px; border-radius: 6px; transition: color .15s, background .15s; font-family: inherit; }
     .btn-close-panel:hover { color: var(--danger); background: rgba(248,113,113,0.1); }
 
-    .amount-input-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .amount-currency {
-      position: absolute;
-      right: 16px;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--green-dim);
-      pointer-events: none;
-      letter-spacing: 0.06em;
-    }
-
+    .amount-input-wrap { position: relative; display: flex; align-items: center; }
+    .amount-currency { position: absolute; right: 16px; font-size: 16px; font-weight: 600; color: var(--green-dim); pointer-events: none; letter-spacing: 0.06em; }
     #amount-input, #edit-amount {
       font-family: 'Inter', sans-serif;
       width: 100%;
@@ -289,208 +171,72 @@
       transition: border-color .2s, box-shadow .2s;
       letter-spacing: -0.01em;
     }
-    #amount-input::placeholder, #edit-amount::placeholder { color: var(--muted); font-weight: 400; font-size: 20px; }
-    #amount-input:focus, #edit-amount:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px var(--green-glow);
-    }
+    #amount-input:focus, #edit-amount:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow); }
 
     .btn-confirm {
-      font-family: inherit;
-      width: 100%;
-      padding: 15px;
-      background: var(--green);
-      color: #0d0d0d;
-      border: none;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: 0.04em;
-      transition: all .2s;
+      font-family: inherit; width: 100%; padding: 15px; background: var(--green); color: #0d0d0d;
+      border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer;
+      letter-spacing: 0.04em; transition: all .2s;
     }
-    .btn-confirm:hover {
-      background: var(--green-soft);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(74,222,128,0.25);
-    }
+    .btn-confirm:hover { background: var(--green-soft); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(74,222,128,0.25); }
     .btn-confirm:active { transform: translateY(0); }
 
     .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(4px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      padding: 20px;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px;
     }
     .modal-overlay.active { display: flex; }
 
     .modal-box {
-      max-width: 440px;
-      width: 100%;
-      background: var(--surface);
-      border: 1.5px solid var(--green-dim);
-      border-radius: 24px;
-      padding: 28px 24px 24px;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.6);
-      animation: slideDown .25s cubic-bezier(.4,0,.2,1);
+      max-width: 440px; width: 100%; background: var(--surface);
+      border: 1.5px solid var(--green-dim); border-radius: 24px; padding: 28px 24px 24px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.6); animation: slideDown .25s cubic-bezier(.4,0,.2,1);
     }
 
-    .modal-box label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
+    .modal-box label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
     .modal-box select {
-      font-family: 'Inter', sans-serif;
-      width: 100%;
-      background: var(--input-bg);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      color: var(--text);
-      font-size: 16px;
-      font-weight: 500;
-      padding: 12px 16px;
-      outline: none;
-      appearance: none;
-      -webkit-appearance: none;
+      font-family: 'Inter', sans-serif; width: 100%; background: var(--input-bg);
+      border: 1.5px solid var(--border); border-radius: 12px; color: var(--text);
+      font-size: 16px; font-weight: 500; padding: 12px 16px; outline: none;
+      appearance: none; -webkit-appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
       transition: border-color .2s, box-shadow .2s;
     }
-    .modal-box select:focus {
-      border-color: var(--green-dim);
-      box-shadow: 0 0 0 3px var(--green-glow);
-    }
+    .modal-box select:focus { border-color: var(--green-dim); box-shadow: 0 0 0 3px var(--green-glow); }
     .modal-box select option { background: var(--card); color: var(--text); }
 
     .toast {
-      position: fixed;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: var(--card);
-      border: 1px solid var(--green-dim);
-      color: var(--green);
-      font-size: 14px;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 50px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-      transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .3s;
-      opacity: 0;
-      z-index: 1000;
-      pointer-events: none;
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--card); border: 1px solid var(--green-dim); color: var(--green);
+      font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: 50px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4); transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .3s;
+      opacity: 0; z-index: 1000; pointer-events: none;
     }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
     #screen-pregled { padding-top: 28px; flex-direction: column; gap: 0; }
     .pregled-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-    .btn-back {
-      font-family: inherit;
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all .2s;
-    }
+    .btn-back { font-family: inherit; background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 13px; cursor: pointer; transition: all .2s; }
     .btn-back:hover { color: var(--green); border-color: var(--green-dim); }
     .pregled-title { font-size: 20px; font-weight: 700; }
 
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-    .filter-chip {
-      font-family: inherit;
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all .18s;
-    }
-    .filter-chip:hover, .filter-chip.active {
-      background: var(--green-glow);
-      border-color: var(--green-dim);
-      color: var(--green);
-    }
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+    .filter-chip { font-family: inherit; background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all .18s; }
+    .filter-chip:hover, .filter-chip.active { background: var(--green-glow); border-color: var(--green-dim); color: var(--green); }
 
-    .summary-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .summary-card {
-      flex: 1;
-      min-width: 70px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 12px;
-      text-align: center;
-    }
-    .summary-card .s-label {
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .summary-card .s-val {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--green);
-      margin-top: 4px;
-    }
+    .summary-row { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .summary-card { flex: 1; min-width: 70px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 12px; text-align: center; }
+    .summary-card .s-label { font-size: 11px; color: var(--muted); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+    .summary-card .s-val { font-size: 18px; font-weight: 700; color: var(--green); margin-top: 4px; }
     .summary-card .s-val.orange { color: #fbbf24; }
     .summary-card .s-val.red { color: var(--danger); }
 
     .expense-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
     .expense-day-group { display: flex; flex-direction: column; gap: 4px; }
-    .day-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 10px 0 4px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 4px;
-    }
-    .expense-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transition: border-color .15s;
-    }
+    .day-label { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 0 4px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+    .expense-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; transition: border-color .15s; }
     .expense-item:hover { border-color: #333; }
     .expense-item .ei-icon { font-size: 20px; flex-shrink: 0; }
     .expense-item .ei-info { display: flex; flex-direction: column; gap: 2px; flex: 1; }
@@ -498,64 +244,27 @@
     .expense-item .ei-time { font-size: 11px; color: var(--muted); }
     .expense-item .ei-amt { font-size: 16px; font-weight: 700; color: var(--green); }
     .expense-item .ei-actions { display: flex; gap: 4px; }
-    .expense-item .ei-edit, .expense-item .ei-del {
-      background: none; border: none; color: var(--muted);
-      font-size: 16px; cursor: pointer; padding: 4px 6px;
-      border-radius: 6px; transition: color .15s, background .15s;
-      font-family: inherit; line-height: 1;
-    }
+    .expense-item .ei-edit, .expense-item .ei-del { background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; padding: 4px 6px; border-radius: 6px; transition: color .15s, background .15s; font-family: inherit; line-height: 1; }
     .expense-item .ei-edit:hover { color: var(--green); background: rgba(74,222,128,0.1); }
     .expense-item .ei-del:hover { color: var(--danger); background: rgba(248,113,113,0.1); }
 
-    .empty-state {
-      text-align: center; color: var(--muted); font-size: 14px;
-      padding: 48px 0; display: flex; flex-direction: column; align-items: center; gap: 10px;
-    }
+    .empty-state { text-align: center; color: var(--muted); font-size: 14px; padding: 48px 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
     .empty-state .e-icon { font-size: 40px; }
 
-    .btn-export {
-      font-family: inherit; width: 100%; padding: 15px;
-      background: transparent; color: var(--green);
-      border: 1.5px solid var(--green-dim); border-radius: 12px;
-      font-size: 14px; font-weight: 600; cursor: pointer;
-      letter-spacing: 0.04em; transition: all .2s;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      margin-bottom: 10px;
-    }
-    .btn-export:hover {
-      background: var(--green-glow); border-color: var(--green);
-      transform: translateY(-1px); box-shadow: 0 4px 20px rgba(74,222,128,0.12);
-    }
+    .btn-export { font-family: inherit; width: 100%; padding: 15px; background: transparent; color: var(--green); border: 1.5px solid var(--green-dim); border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; letter-spacing: 0.04em; transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+    .btn-export:hover { background: var(--green-glow); border-color: var(--green); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(74,222,128,0.12); }
     .no-entries-msg { text-align: center; color: var(--muted); font-size: 12px; padding: 8px 0; }
 
     .month-selector { width: 100%; margin-bottom: 16px; }
-    .month-selector label {
-      font-size: 11px; font-weight: 600; color: var(--muted);
-      letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 8px;
-    }
+    .month-selector label { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 8px; }
     .month-select-row { display: flex; gap: 8px; align-items: center; }
-    #month-pick {
-      font-family: 'Inter', sans-serif; flex: 1; background: var(--input-bg);
-      border: 1.5px solid var(--border); border-radius: 10px; color: var(--text);
-      font-size: 14px; font-weight: 500; padding: 10px 14px; outline: none;
-      cursor: pointer; transition: border-color .2s, box-shadow .2s;
-      appearance: none; -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
-    }
+    #month-pick { font-family: 'Inter', sans-serif; flex: 1; background: var(--input-bg); border: 1.5px solid var(--border); border-radius: 10px; color: var(--text); font-size: 14px; font-weight: 500; padding: 10px 14px; outline: none; cursor: pointer; transition: border-color .2s, box-shadow .2s; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
     #month-pick:focus { border-color: var(--green-dim); box-shadow: 0 0 0 3px var(--green-glow); }
     #month-pick option { background: var(--card); color: var(--text); }
-    .btn-clear-month {
-      font-family: inherit; background: var(--card); border: 1px solid var(--border);
-      color: var(--muted); border-radius: 10px; padding: 10px 14px; font-size: 12px;
-      font-weight: 500; cursor: pointer; white-space: nowrap; transition: all .18s;
-    }
+    .btn-clear-month { font-family: inherit; background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 10px; padding: 10px 14px; font-size: 12px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: all .18s; }
     .btn-clear-month:hover { color: var(--green); border-color: var(--green-dim); background: var(--green-glow); }
 
-    .month-summary-block {
-      background: var(--card); border: 1.5px solid var(--green-dim); border-radius: 16px;
-      padding: 18px 18px 14px; margin-bottom: 18px; display: none;
-    }
+    .month-summary-block { background: var(--card); border: 1.5px solid var(--green-dim); border-radius: 16px; padding: 18px 18px 14px; margin-bottom: 18px; display: none; }
     .month-summary-block.show { display: block; }
     .msb-title { font-size: 12px; font-weight: 600; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
     .msb-rows { display: flex; flex-direction: column; gap: 8px; }
@@ -573,13 +282,7 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
     
-    /* Loader */
-    .loader {
-      position: fixed; inset: 0; background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 9999; flex-direction: column; gap: 20px;
-      transition: opacity 0.4s;
-    }
+    .loader { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 9999; flex-direction: column; gap: 20px; transition: opacity 0.4s; }
     .loader.hidden { opacity: 0; pointer-events: none; }
     .loader-spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -587,13 +290,11 @@
 </head>
 <body>
 
-<!-- LOADER -->
 <div class="loader" id="loader">
   <div class="loader-spinner"></div>
   <div style="color: var(--muted); font-size: 14px;">Učitavanje podataka iz Google Sheets...</div>
 </div>
 
-<!-- TOP BAR -->
 <div class="topbar">
   <div class="app-title">Troškovi</div>
   <div class="top-actions">
@@ -602,23 +303,17 @@
   </div>
 </div>
 
-<!-- HOME SCREEN -->
 <div class="screen active" id="screen-home">
   <div class="hero-label">Danas</div>
   <div class="hero-date" id="today-date"></div>
   <div class="hero-total-label">Potrošeno danas</div>
   <div class="hero-total" id="today-total">0,00 <span>KM</span></div>
-
   <div class="divider"></div>
-
   <div class="hero-total-label">Ukupno potrošeno</div>
   <div class="hero-total small" id="total-all">0,00 <span>KM</span></div>
-
   <div class="hero-total-label">Preostalo</div>
   <div class="hero-total small" id="remaining">0,00 <span>KM</span></div>
-
   <div class="divider"></div>
-
   <div class="cat-buttons">
     <button class="btn-cat" id="btn-Trgovina" onclick="selectCat('Trgovina')">
       <span class="cat-icon">🛒</span>
@@ -636,7 +331,6 @@
       <span class="cat-arrow">›</span>
     </button>
   </div>
-
   <div class="input-panel" id="input-panel">
     <div class="panel-header">
       <div class="panel-cat-name" id="panel-cat-label"></div>
@@ -650,13 +344,11 @@
   </div>
 </div>
 
-<!-- PREGLED SCREEN -->
 <div class="screen" id="screen-pregled">
   <div class="pregled-header">
     <button class="btn-back" onclick="showHome()">← Nazad</button>
     <div class="pregled-title">Pregled troškova</div>
   </div>
-
   <div class="month-selector">
     <label>Filtriraj po mjesecu</label>
     <div class="month-select-row">
@@ -666,7 +358,6 @@
       <button class="btn-clear-month" onclick="clearMonth()">Svi</button>
     </div>
   </div>
-
   <div class="month-summary-block" id="month-summary-block">
     <div class="msb-title" id="msb-title"></div>
     <div class="msb-rows" id="msb-rows"></div>
@@ -676,24 +367,20 @@
       <div class="msb-total-val" id="msb-total"></div>
     </div>
   </div>
-
   <div class="filter-bar" id="filter-bar">
     <button class="filter-chip active" data-f="svi" onclick="setFilter('svi',this)">Svi</button>
     <button class="filter-chip" data-f="Trgovina" onclick="setFilter('Trgovina',this)">🛒 Trgovina</button>
     <button class="filter-chip" data-f="Kafana" onclick="setFilter('Kafana',this)">☕ Kafana</button>
     <button class="filter-chip" data-f="Ostalo" onclick="setFilter('Ostalo',this)">📦 Ostalo</button>
   </div>
-
   <div class="summary-row" id="summary-row"></div>
   <div class="expense-list" id="expense-list"></div>
-
   <button class="btn-export" onclick="exportExcel()">
     <span>📊</span> Izradi listu (Excel / Sheets)
   </button>
   <div class="no-entries-msg" id="export-note"></div>
 </div>
 
-<!-- SETTINGS MODAL -->
 <div class="modal-overlay" id="settings-modal">
   <div class="modal-box">
     <div class="panel-header">
@@ -712,438 +399,10 @@
   </div>
 </div>
 
-<!-- EDIT MODAL -->
 <div class="modal-overlay" id="edit-modal">
   <div class="modal-box">
     <div class="panel-header">
       <div class="panel-cat-name">✎ Uredi trošak</div>
       <button class="btn-close-panel" onclick="closeEditModal()">✕</button>
     </div>
-    <label for="edit-category">Kategorija</label>
-    <select id="edit-category">
-      <option value="Trgovina">🛒 Trgovina</option>
-      <option value="Kafana">☕ Kafana</option>
-      <option value="Ostalo">📦 Ostalo</option>
-    </select>
-    <div class="amount-input-wrap" style="margin-top:12px;">
-      <span class="amount-currency">KM</span>
-      <input type="number" id="edit-amount" placeholder="0,00" min="0" step="0.01" />
-    </div>
-    <button class="btn-confirm" onclick="saveEdit()" style="margin-top:12px;">✓ Spremi izmjene</button>
-  </div>
-</div>
-
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
-<script>
-  // ⚠️ ZAMIJENI OVO SA SVOJIM WEB APP URL-om
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxkFIujSW34XBboaUlXaUIcoIDF2ZO7ykMW5HY2WbAaLaY1jeOijfnZ3jyud1sicTrz/exec';
-
-  const icons = { Trgovina: '🛒', Kafana: '☕', Ostalo: '📦' };
-  let activeCategory = null;
-  let activeFilter = 'svi';
-  let activeMonth = '';
-  let editingId = null;
-
-  // Globalno stanje u memoriji (sinkronizira se s Google Sheets)
-  let APP_DATA = { expenses: [], budget: 0 };
-
-  // ─── Dohvati podatke iz Google Sheets ───
-   async function syncData() {
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(APP_DATA)
-      });
-      const response = await res.json();
-      
-      // Ako je vratilo "error", prikaži korisniku šta je problem
-      if (response.status === 'error') {
-        showToast('⚠️ ' + response.message);
-        throw new Error(response.message);
-      }
-    } catch (e) {
-      console.error('Greška pri spremanju:', e);
-      showToast('⚠️ Greška pri spremanju u Google Sheets');
-    }
-  }
-
-  // ─── Spremi podatke u Google Sheets ───
-  async function syncData() {
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(APP_DATA)
-      });
-      if (!res.ok) throw new Error('Greška pri spremanju');
-    } catch (e) {
-      console.error('Greška pri spremanju:', e);
-      showToast('⚠️ Greška pri spremanju u Google Sheets');
-    }
-  }
-
-  // ─── Formatiranje ───
-  function fmtAmt(n) { return parseFloat(n).toFixed(2).replace('.',','); }
-  function todayKey() {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  }
-  function todayStr() {
-    const d = new Date();
-    return d.toLocaleDateString('bs-BA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-  }
-  function fmtDate(iso) {
-    const d = new Date(iso);
-    return d.toLocaleDateString('bs-BA', { weekday:'short', day:'2-digit', month:'short', year:'numeric' });
-  }
-  function fmtTime(iso) {
-    const d = new Date(iso);
-    return d.toLocaleTimeString('bs-BA', { hour:'2-digit', minute:'2-digit' });
-  }
-
-  // ─── Ažuriranje početnog ekrana ───
-  function updateHomeTotal() {
-    const data = APP_DATA.expenses;
-    const tk = todayKey();
-    const todaySum = data.filter(e => e.date.startsWith(tk)).reduce((s,e) => s + parseFloat(e.amount), 0);
-    document.getElementById('today-total').innerHTML = `${fmtAmt(todaySum)} <span>KM</span>`;
-    document.getElementById('today-date').textContent = todayStr();
-
-    const totalAll = data.reduce((s,e) => s + parseFloat(e.amount), 0);
-    document.getElementById('total-all').innerHTML = `${fmtAmt(totalAll)} <span>KM</span>`;
-
-    const budget = APP_DATA.budget;
-    const remaining = budget - totalAll;
-    const remEl = document.getElementById('remaining');
-    remEl.innerHTML = `${fmtAmt(remaining)} <span>KM</span>`;
-    remEl.className = 'hero-total small';
-    if (remaining < 0) remEl.classList.add('red');
-    else if (remaining < budget * 0.2) remEl.classList.add('orange');
-  }
-
-  // ─── Kategorije ───
-  function selectCat(cat) {
-    if (activeCategory === cat) { closePanel(); return; }
-    activeCategory = cat;
-    document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
-    document.getElementById('btn-' + cat).classList.add('active');
-    document.getElementById('panel-cat-label').textContent = icons[cat] + '  ' + cat;
-    document.getElementById('input-panel').classList.add('show');
-    const inp = document.getElementById('amount-input');
-    inp.value = '';
-    setTimeout(() => inp.focus(), 50);
-  }
-
-  function closePanel() {
-    activeCategory = null;
-    document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
-    document.getElementById('input-panel').classList.remove('show');
-    document.getElementById('amount-input').value = '';
-  }
-
-  // ─── Dodavanje troška ───
-  async function confirmAmount() {
-    const val = parseFloat(document.getElementById('amount-input').value);
-    if (!activeCategory) return;
-    if (isNaN(val) || val <= 0) { showToast('⚠ Unesite ispravan iznos'); return; }
-
-    APP_DATA.expenses.push({
-      id: Date.now(),
-      category: activeCategory,
-      amount: val,
-      date: new Date().toISOString()
-    });
-    await syncData();
-    showToast(`${icons[activeCategory]} ${fmtAmt(val)} KM dodano`);
-    closePanel();
-    updateHomeTotal();
-  }
-
-  // ─── Toast ───
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2200);
-  }
-
-  // ─── Mjeseci ───
-  function populateMonthPicker() {
-    const months = {};
-    APP_DATA.expenses.forEach(e => {
-      const mk = e.date.slice(0,7);
-      if (!months[mk]) {
-        const d = new Date(mk + '-15');
-        months[mk] = d.toLocaleDateString('bs-BA', { year:'numeric', month:'long' });
-      }
-    });
-    const sel = document.getElementById('month-pick');
-    sel.innerHTML = '<option value="">— Svi mjeseci —</option>';
-    Object.keys(months).sort().reverse().forEach(mk => {
-      const opt = document.createElement('option');
-      opt.value = mk;
-      opt.textContent = months[mk];
-      if (mk === activeMonth) opt.selected = true;
-      sel.appendChild(opt);
-    });
-  }
-
-  function setMonth(val) { activeMonth = val; renderPregled(); }
-  function clearMonth() { activeMonth = ''; document.getElementById('month-pick').value = ''; renderPregled(); }
-
-  function renderMonthSummary(monthData) {
-    const block = document.getElementById('month-summary-block');
-    if (!activeMonth || monthData.length === 0) { block.classList.remove('show'); return; }
-    block.classList.add('show');
-    const d = new Date(activeMonth + '-15');
-    const label = d.toLocaleDateString('bs-BA', { year:'numeric', month:'long' });
-    document.getElementById('msb-title').textContent = '📅 ' + label;
-
-    const cats = ['Trgovina','Kafana','Ostalo'];
-    const catTotals = {};
-    cats.forEach(c => catTotals[c] = 0);
-    monthData.forEach(e => { if (catTotals[e.category] !== undefined) catTotals[e.category] += parseFloat(e.amount); });
-    const grandTotal = monthData.reduce((s,e) => s + parseFloat(e.amount), 0);
-
-    const rowsEl = document.getElementById('msb-rows');
-    rowsEl.innerHTML = '';
-    cats.forEach(cat => {
-      const amt = catTotals[cat];
-      const pct = grandTotal > 0 ? (amt / grandTotal * 100) : 0;
-      rowsEl.innerHTML += `
-        <div class="msb-row">
-          <div class="msb-cat">${icons[cat]} <span>${cat}</span></div>
-          <div class="msb-bar-wrap"><div class="msb-bar" style="width:${pct.toFixed(1)}%"></div></div>
-          <div class="msb-amt">${fmtAmt(amt)} KM</div>
-        </div>`;
-    });
-    document.getElementById('msb-total').textContent = fmtAmt(grandTotal) + ' KM';
-  }
-
-  // ─── Navigacija ───
-  function showPregled() {
-    closePanel();
-    document.getElementById('screen-home').classList.remove('active');
-    document.getElementById('screen-pregled').classList.add('active');
-    populateMonthPicker();
-    renderPregled();
-  }
-
-  function showHome() {
-    document.getElementById('screen-pregled').classList.remove('active');
-    document.getElementById('screen-home').classList.add('active');
-    updateHomeTotal();
-  }
-
-  // ─── Filter ───
-  function setFilter(f, el) {
-    activeFilter = f;
-    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    renderPregled();
-  }
-
-  // ─── Render pregled ───
-  function renderPregled() {
-    const all = APP_DATA.expenses;
-    const monthFiltered = activeMonth ? all.filter(e => e.date.slice(0,7) === activeMonth) : all;
-    const data = activeFilter === 'svi' ? monthFiltered : monthFiltered.filter(e => e.category === activeFilter);
-
-    renderMonthSummary(monthFiltered);
-
-    const sumRow = document.getElementById('summary-row');
-    sumRow.innerHTML = '';
-    const cats = ['Trgovina','Kafana','Ostalo'];
-    const totalAll = monthFiltered.reduce((s,e) => s + parseFloat(e.amount), 0);
-
-    if (!activeMonth) {
-      sumRow.innerHTML += `
-        <div class="summary-card"><div class="s-label">Ukupno</div><div class="s-val">${fmtAmt(totalAll)} KM</div></div>`;
-      cats.forEach(c => {
-        const val = monthFiltered.filter(e=>e.category===c).reduce((s,e)=>s+parseFloat(e.amount),0);
-        sumRow.innerHTML += `
-          <div class="summary-card"><div class="s-label">${c}</div><div class="s-val">${fmtAmt(val)} KM</div></div>`;
-      });
-      const budget = APP_DATA.budget;
-      const remaining = budget - totalAll;
-      let colorClass = '';
-      if (remaining < 0) colorClass = 'red';
-      else if (remaining < budget * 0.2) colorClass = 'orange';
-      sumRow.innerHTML += `
-        <div class="summary-card"><div class="s-label">Preostalo</div><div class="s-val ${colorClass}">${fmtAmt(remaining)} KM</div></div>`;
-    }
-
-    const list = document.getElementById('expense-list');
-    list.innerHTML = '';
-    if (data.length === 0) {
-      list.innerHTML = `<div class="empty-state"><div class="e-icon">🌿</div><div>Nema zabilježenih troškova</div></div>`;
-      document.getElementById('export-note').textContent = '';
-      return;
-    }
-
-    const groups = {};
-    [...data].sort((a,b) => new Date(b.date)-new Date(a.date)).forEach(e => {
-      const dk = e.date.slice(0,10);
-      if (!groups[dk]) groups[dk] = [];
-      groups[dk].push(e);
-    });
-
-    Object.keys(groups).forEach(dk => {
-      const grp = document.createElement('div');
-      grp.className = 'expense-day-group';
-      const dayTotal = groups[dk].reduce((s,e)=>s+parseFloat(e.amount),0);
-      grp.innerHTML = `<div class="day-label">${fmtDate(dk+'T12:00:00')} &nbsp;·&nbsp; ${fmtAmt(dayTotal)} KM</div>`;
-      groups[dk].forEach(e => {
-        const row = document.createElement('div');
-        row.className = 'expense-item';
-        row.innerHTML = `
-          <div class="ei-icon">${icons[e.category]}</div>
-          <div class="ei-info"><div class="ei-cat">${e.category}</div><div class="ei-time">${fmtTime(e.date)}</div></div>
-          <div class="ei-amt">${fmtAmt(e.amount)} KM</div>
-          <div class="ei-actions">
-            <button class="ei-edit" title="Uredi" onclick="openEditModal(${e.id})">✎</button>
-            <button class="ei-del" title="Obriši" onclick="deleteEntry(${e.id})">✕</button>
-          </div>`;
-        grp.appendChild(row);
-      });
-      list.appendChild(grp);
-    });
-
-    const total = data.reduce((s,e)=>s+parseFloat(e.amount),0);
-    document.getElementById('export-note').textContent = `${data.length} stavki · Ukupno: ${fmtAmt(total)} KM`;
-  }
-
-  // ─── Brisanje ───
-  async function deleteEntry(id) {
-    APP_DATA.expenses = APP_DATA.expenses.filter(e => e.id !== id);
-    await syncData();
-    renderPregled();
-    updateHomeTotal();
-    showToast('Stavka obrisana');
-  }
-
-  // ─── Postavke (budžet) ───
-  function openSettings() {
-    document.getElementById('settings-modal').classList.add('active');
-    document.getElementById('budget-input').value = APP_DATA.budget || '';
-    document.getElementById('budget-input').focus();
-  }
-  function closeSettings() { document.getElementById('settings-modal').classList.remove('active'); }
-
-  async function saveBudget() {
-    const val = parseFloat(document.getElementById('budget-input').value);
-    if (isNaN(val) || val < 0) { showToast('⚠ Unesite ispravan iznos'); return; }
-    APP_DATA.budget = val;
-    await syncData();
-    closeSettings();
-    updateHomeTotal();
-    if (document.getElementById('screen-pregled').classList.contains('active')) renderPregled();
-    showToast('💶 Stanje spremljeno');
-  }
-
-  async function resetBudget() {
-    if (confirm('Resetirati raspoloživo stanje na 0?')) {
-      APP_DATA.budget = 0;
-      await syncData();
-      closeSettings();
-      updateHomeTotal();
-      if (document.getElementById('screen-pregled').classList.contains('active')) renderPregled();
-      showToast('Stanje resetirano');
-    }
-  }
-
-  // ─── Uređivanje ───
-  function openEditModal(id) {
-    const entry = APP_DATA.expenses.find(e => e.id === id);
-    if (!entry) return;
-    editingId = id;
-    document.getElementById('edit-category').value = entry.category;
-    document.getElementById('edit-amount').value = entry.amount;
-    document.getElementById('edit-modal').classList.add('active');
-    document.getElementById('edit-amount').focus();
-  }
-
-  function closeEditModal() { document.getElementById('edit-modal').classList.remove('active'); editingId = null; }
-
-  async function saveEdit() {
-    if (!editingId) return;
-    const category = document.getElementById('edit-category').value;
-    const amount = parseFloat(document.getElementById('edit-amount').value);
-    if (isNaN(amount) || amount <= 0) { showToast('⚠ Unesite ispravan iznos'); return; }
-    const idx = APP_DATA.expenses.findIndex(e => e.id === editingId);
-    if (idx === -1) return;
-    APP_DATA.expenses[idx].category = category;
-    APP_DATA.expenses[idx].amount = amount;
-    await syncData();
-    closeEditModal();
-    renderPregled();
-    updateHomeTotal();
-    showToast('✎ Trošak uređen');
-  }
-
-  // ─── Izvoz u CSV ───
-  function exportExcel() {
-    const all = APP_DATA.expenses;
-    const monthFiltered = activeMonth ? all.filter(e => e.date.slice(0,7) === activeMonth) : all;
-    const data = activeFilter === 'svi' ? monthFiltered : monthFiltered.filter(e => e.category === activeFilter);
-    if (data.length === 0) { showToast('Nema podataka za izvoz'); return; }
-
-    const sorted = [...data].sort((a,b) => new Date(a.date)-new Date(b.date));
-    const BOM = '\uFEFF';
-    const header = ['Datum','Vrijeme','Kategorija','Iznos (KM)'];
-    const rows = sorted.map(e => {
-      const d = new Date(e.date);
-      const datum = d.toLocaleDateString('bs-BA');
-      const vrijeme = d.toLocaleTimeString('bs-BA', {hour:'2-digit', minute:'2-digit'});
-      const iznos = parseFloat(e.amount).toFixed(2).replace('.',',');
-      return [datum, vrijeme, e.category, iznos].map(v=>`"${v}"`).join(';');
-    });
-
-    const months = {};
-    sorted.forEach(e => {
-      const d = new Date(e.date);
-      const mk = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-      const ml = d.toLocaleDateString('bs-BA',{year:'numeric',month:'long'});
-      if (!months[mk]) months[mk] = { label: ml, total: 0 };
-      months[mk].total += parseFloat(e.amount);
-    });
-    const summaryRows = ['','','SUMARNO PO MJESECU',''];
-    summaryRows.push('"Mjesec";"Ukupno (KM)"');
-    Object.values(months).forEach(m => {
-      summaryRows.push(`"${m.label}";"${m.total.toFixed(2).replace('.',',')}"`);
-    });
-    const grandTotal = sorted.reduce((s,e)=>s+parseFloat(e.amount),0);
-    summaryRows.push(`"UKUPNO";"${grandTotal.toFixed(2).replace('.',',')}"`);
-
-    const csv = BOM + header.map(h=>`"${h}"`).join(';') + '\r\n' + rows.join('\r\n') + '\r\n' + summaryRows.join('\r\n');
-    const slug = activeMonth || `${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,'0')}`;
-    const fname = `troskovnik_${slug}.csv`;
-
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = fname; a.click();
-    URL.revokeObjectURL(url);
-    showToast(`📊 Izvezeno ${data.length} stavki`);
-  }
-
-  // ─── Inicijalizacija ───
-  async function init() {
-    const loader = document.getElementById('loader');
-    try {
-      await fetchData();
-      updateHomeTotal();
-    } catch (e) {
-      showToast('⚠️ Neuspješno učitavanje, provjerite API URL');
-    } finally {
-      loader.classList.add('hidden');
-    }
-  }
-
-  init();
-</script>
-</body>
-</html>
+    <label for="edit
