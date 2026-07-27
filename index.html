@@ -422,7 +422,11 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // ⚠️ ZAMIJENI OVO SA SVOJIM NOVIM WEB APP URL-om (završava sa /exec)
+  // ⚠️ ZAMIJENI OVO SA SVOJIM WEB APP URL-om (završava sa /exec)
+  // VAŽNO: Kod svakog "Deploy" u Apps Scriptu koristi "New deployment" (ne samo "Save"),
+  // i obavezno postavi "Who has access: Anyone" (NE "Anyone with Google account"),
+  // inače u incognito modu / kada korisnik nije prijavljen na Google, server vraća
+  // HTML stranicu za prijavu umjesto podataka i aplikacija izgleda "prazna".
   const API_URL = 'https://script.google.com/macros/s/AKfycbx9Wq4EomjBOfxgvZ0Pjd8pG5A8LuVIgfXloTqWaeZR5Q_OYQiacVmHo9YGQw6aqizi/exec';
 
   const icons = { Trgovina: '🛒', Kafana: '☕', Ostalo: '📦' };
@@ -433,61 +437,67 @@
 
   let APP_DATA = { expenses: [], budget: 0 };
 
+  let dataLoaded = false; // sprečava spremanje prije nego što su podaci uspješno učitani
+
+  // Zajednička obrada odgovora servera. Ako server (npr. zbog pogrešnih
+  // postavki pristupa u incognito modu) vrati HTML stranicu za prijavu
+  // umjesto JSON-a, ovdje to hvatamo i javljamo jasnu grešku umjesto da
+  // tiho nastavimo s praznim podacima.
+  async function parseServerResponse(res) {
+    const text = await res.text();
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      if (/<html/i.test(text)) {
+        throw new Error('DEPLOY: Server je vratio HTML stranicu umjesto podataka. Provjerite da je Web App deployment postavljen na "Anyone" (ne "Anyone with Google account") i da koristite zadnji /exec URL.');
+      }
+      throw new Error('Neispravan odgovor servera: ' + text.slice(0, 200));
+    }
+  }
+
   async function fetchData() {
     try {
       // Dodajemo timestamp da spriječimo keširanje
       const url = API_URL + '?t=' + Date.now();
-      const res = await fetch(url, {
-        method: 'GET',
-        cache: 'no-cache'
-      });
-      
-      if (!res.ok) {
-        throw new Error(`HTTP greška ${res.status} - ${res.statusText}`);
-      }
-      
-      const data = await res.json();
-      APP_DATA.expenses = data.expenses || [];
-      APP_DATA.budget = typeof data.budget === 'number' ? data.budget : 0;
-      
+      const res = await fetch(url, { method: 'GET', cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP greška ${res.status} - ${res.statusText}`);
+
+      const data = await parseServerResponse(res);
+      if (data.status === 'error') throw new Error(data.message);
+
+      APP_DATA.expenses = Array.isArray(data.expenses) ? data.expenses : [];
+      APP_DATA.budget = typeof data.budget === 'number' ? data.budget : parseFloat(data.budget) || 0;
+      dataLoaded = true;
     } catch (e) {
       console.error('Greška pri dohvatu:', e);
-      // Ako je greška "Failed to fetch", često je CORS ili pogrešan URL
-      showToast('⚠️ Neuspješno učitavanje. Provjerite API URL (CORS)');
+      dataLoaded = false;
+      showToast('⚠️ Neuspješno učitavanje. ' + (e.message.startsWith('DEPLOY') ? 'Provjerite postavke deploya.' : ''));
       throw e; // Propagiraj grešku u init
     }
   }
 
-    async function syncData() {
-    try {
-      // Google Apps Script NIJE dozvolio JSON Content-Type sa vanjske strane
-      // Zato ćemo podatke poslati kao običan tekst (form-urlencoded) da preskočimo CORS.
-      
-      const payload = new URLSearchParams();
-      payload.append('data', JSON.stringify(APP_DATA));
+  // Šalje JEDNU akciju serveru (add / edit / delete / budget). Server nikad
+  // ne briše cijeli list — samo mijenja red na koji se akcija odnosi, tako
+  // da neuspjeh mreže ili učitavanja nikad ne može obrisati postojeće
+  // podatke iz Google Sheeta (za razliku od stare "pošalji sve" logike).
+  async function postAction(action, extra) {
+    const payload = new URLSearchParams();
+    payload.append('data', JSON.stringify(Object.assign({ action }, extra)));
 
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          // Ovo je ključno: Ne šaljemo 'application/json' nego obični tekst
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: payload.toString()
-      });
-      
-      const response = await res.json();
-      
-      if (response.status === 'error') {
-        showToast('⚠️ ' + response.message);
-        throw new Error(response.message);
-      }
-    } catch (e) {
-      console.error('Greška pri spremanju:', e);
-      // Sprečavamo da se toast "Greška pri spremanju" pojavi ako je korisnik već vidio poruku
-      if (!e.message.includes('⚠️')) {
-        showToast('⚠️ Greška pri spremanju u Google Sheets');
-      }
-    }
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: payload.toString()
+    });
+
+    const response = await parseServerResponse(res);
+    if (response.status === 'error') throw new Error(response.message);
+
+    // Server vraća svježe stanje nakon svake akcije - koristimo ga da
+    // lokalni prikaz uvijek bude usklađen sa Sheetom.
+    if (Array.isArray(response.expenses)) APP_DATA.expenses = response.expenses;
+    if (typeof response.budget === 'number') APP_DATA.budget = response.budget;
+    return response;
   }
 
   function fmtAmt(n) { return parseFloat(n).toFixed(2).replace('.',','); }
@@ -550,16 +560,20 @@
     const val = parseFloat(document.getElementById('amount-input').value);
     if (!activeCategory) return;
     if (isNaN(val) || val <= 0) { showToast('⚠ Unesite ispravan iznos'); return; }
+    if (!dataLoaded) { showToast('⚠️ Podaci nisu učitani, osvježite stranicu'); return; }
 
-    APP_DATA.expenses.push({
-      id: Date.now(),
-      category: activeCategory,
-      amount: val,
-      date: new Date().toISOString()
-    });
-    await syncData();
-    showToast(`${icons[activeCategory]} ${fmtAmt(val)} KM dodano`);
+    const expense = { id: Date.now(), category: activeCategory, amount: val, date: new Date().toISOString() };
+    APP_DATA.expenses.push(expense);
+    updateHomeTotal();
     closePanel();
+    try {
+      await postAction('add', { expense });
+      showToast(`${icons[activeCategory]} ${fmtAmt(val)} KM dodano`);
+    } catch (e) {
+      console.error('Greška pri dodavanju:', e);
+      APP_DATA.expenses = APP_DATA.expenses.filter(x => x.id !== expense.id);
+      showToast('⚠️ Nije spremljeno: ' + e.message);
+    }
     updateHomeTotal();
   }
 
@@ -713,11 +727,20 @@
   }
 
   async function deleteEntry(id) {
+    const removed = APP_DATA.expenses.find(e => e.id === id);
     APP_DATA.expenses = APP_DATA.expenses.filter(e => e.id !== id);
-    await syncData();
     renderPregled();
     updateHomeTotal();
-    showToast('Stavka obrisana');
+    try {
+      await postAction('delete', { id });
+      showToast('Stavka obrisana');
+    } catch (e) {
+      console.error('Greška pri brisanju:', e);
+      if (removed) APP_DATA.expenses.push(removed);
+      renderPregled();
+      updateHomeTotal();
+      showToast('⚠️ Nije obrisano: ' + e.message);
+    }
   }
 
   function openSettings() {
@@ -730,22 +753,37 @@
   async function saveBudget() {
     const val = parseFloat(document.getElementById('budget-input').value);
     if (isNaN(val) || val < 0) { showToast('⚠ Unesite ispravan iznos'); return; }
+    const prev = APP_DATA.budget;
     APP_DATA.budget = val;
-    await syncData();
     closeSettings();
     updateHomeTotal();
     if (document.getElementById('screen-pregled').classList.contains('active')) renderPregled();
-    showToast('💶 Stanje spremljeno');
+    try {
+      await postAction('budget', { budget: val });
+      showToast('💶 Stanje spremljeno');
+    } catch (e) {
+      console.error('Greška pri spremanju budžeta:', e);
+      APP_DATA.budget = prev;
+      updateHomeTotal();
+      showToast('⚠️ Nije spremljeno: ' + e.message);
+    }
   }
 
   async function resetBudget() {
-    if (confirm('Resetirati raspoloživo stanje na 0?')) {
-      APP_DATA.budget = 0;
-      await syncData();
-      closeSettings();
-      updateHomeTotal();
-      if (document.getElementById('screen-pregled').classList.contains('active')) renderPregled();
+    if (!confirm('Resetirati raspoloživo stanje na 0?')) return;
+    const prev = APP_DATA.budget;
+    APP_DATA.budget = 0;
+    closeSettings();
+    updateHomeTotal();
+    if (document.getElementById('screen-pregled').classList.contains('active')) renderPregled();
+    try {
+      await postAction('budget', { budget: 0 });
       showToast('Stanje resetirano');
+    } catch (e) {
+      console.error('Greška pri resetiranju budžeta:', e);
+      APP_DATA.budget = prev;
+      updateHomeTotal();
+      showToast('⚠️ Nije resetirano: ' + e.message);
     }
   }
 
@@ -768,13 +806,23 @@
     if (isNaN(amount) || amount <= 0) { showToast('⚠ Unesite ispravan iznos'); return; }
     const idx = APP_DATA.expenses.findIndex(e => e.id === editingId);
     if (idx === -1) return;
+    const idToSave = editingId; // sačuvaj prije nego closeEditModal() postavi editingId na null
+    const prev = Object.assign({}, APP_DATA.expenses[idx]);
     APP_DATA.expenses[idx].category = category;
     APP_DATA.expenses[idx].amount = amount;
-    await syncData();
     closeEditModal();
     renderPregled();
     updateHomeTotal();
-    showToast('✎ Trošak uređen');
+    try {
+      await postAction('edit', { expense: { id: idToSave, category, amount } });
+      showToast('✎ Trošak uređen');
+    } catch (e) {
+      console.error('Greška pri uređivanju:', e);
+      APP_DATA.expenses[idx] = prev;
+      renderPregled();
+      updateHomeTotal();
+      showToast('⚠️ Nije spremljeno: ' + e.message);
+    }
   }
 
   function exportExcel() {
@@ -828,8 +876,9 @@
       await fetchData();
       updateHomeTotal();
     } catch (e) {
-      // Ostavljamo grešku vidljivu, ali sklanjamo loader da korisnik može interagovati
-      showToast('⚠️ Neuspješno učitavanje. Provjerite API URL u kodu.');
+      // dataLoaded ostaje false — confirmAmount() će odbiti dodavanje troška
+      // dok se ovo ne riješi, umjesto da tiho radi s praznim podacima.
+      console.error('Init greška:', e);
     } finally {
       loader.classList.add('hidden');
     }
