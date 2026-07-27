@@ -738,7 +738,7 @@
 
 <script>
   // ⚠️ ZAMIJENI OVO SA SVOJIM WEB APP URL-om
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzTAMbXfMndCUmPoG6Xs8QFYSzDatcmkBBG4avz0NNZSiJsJ6M20qqRa_jqDT6ozZTn/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxkFIujSW34XBboaUlXaUIcoIDF2ZO7ykMW5HY2WbAaLaY1jeOijfnZ3jyud1sicTrz/exec';
 
   const icons = { Trgovina: '🛒', Kafana: '☕', Ostalo: '📦' };
   let activeCategory = null;
@@ -750,16 +750,23 @@
   let APP_DATA = { expenses: [], budget: 0 };
 
   // ─── Dohvati podatke iz Google Sheets ───
-  async function fetchData() {
+   async function syncData() {
     try {
-      const res = await fetch(API_URL);
-      if (!res.ok) throw new Error('Mrežna greška');
-      const data = await res.json();
-      APP_DATA.expenses = data.expenses || [];
-      APP_DATA.budget = typeof data.budget === 'number' ? data.budget : 0;
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(APP_DATA)
+      });
+      const response = await res.json();
+      
+      // Ako je vratilo "error", prikaži korisniku šta je problem
+      if (response.status === 'error') {
+        showToast('⚠️ ' + response.message);
+        throw new Error(response.message);
+      }
     } catch (e) {
-      console.error('Greška pri dohvatu:', e);
-      showToast('⚠️ Greška pri učitavanju podataka');
+      console.error('Greška pri spremanju:', e);
+      showToast('⚠️ Greška pri spremanju u Google Sheets');
     }
   }
 
